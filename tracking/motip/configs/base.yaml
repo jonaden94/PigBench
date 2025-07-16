@@ -103,3 +103,6 @@ CHECKPOINT_DETR_CRITERION: False
 # ################### To avoid CUDA OOM:
 # AUTO_MEMORY_OPTIMIZED_DETR_CRITERION: True
 # DETR_CHECKPOINT_FRAMES: 2
+
+# needed to prevent error when training without slurm
+LOCAL_RANK: ~

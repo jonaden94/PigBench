@@ -123,6 +123,9 @@ def parse_option():
     parser.add_argument("--patience-single", type=int)
     parser.add_argument("--patience-multiple", type=int)
 
+    # dist without slurm
+    parser.add_argument("--local-rank", type=int)
+
     return parser.parse_args()
 
 
@@ -159,7 +162,9 @@ def distributed_world_rank():
 
 
 def is_main_process():
-    return distributed_rank() == 0 or int(os.environ['SLURM_PROCID']) == 0
+    return distributed_rank() == 0 or (
+        'SLURM_PROCID' in os.environ and int(os.environ['SLURM_PROCID']) == 0
+    )
 
 
 def distributed_world_size():
