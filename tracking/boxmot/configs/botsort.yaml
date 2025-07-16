@@ -1,0 +1,5 @@
+super_config_path: configs/base.yaml
+
+# botsort-specific config
+tracker_type: "botsort" # Which tracker to use (e.g. botsort, strongsort, etc.)
+exp_name: "botsort"

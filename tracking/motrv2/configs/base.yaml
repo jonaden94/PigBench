@@ -1,0 +1,72 @@
+super_config_path: ~
+
+# TRAINING
+batch_size: 1 # only 1 is possible
+with_box_refine: True # whether to use boxes as prior, defaults to True (model arg)
+sample_mode: random_interval # for random_inverval, frame rate varies between 1 and sample_interval
+sample_interval: 10 # sample every sample_interval (defaults to 10) frames or a random sample from 1 to it if sample_mode random
+sampler_lengths: [5] # see description of parameter below
+sampler_steps: [0] # checks for each value in the list if epoch is greater than or equal to it and selects corresponding sampler_length
+merger_dropout: 0
+dropout: 0
+random_drop: 0.1
+fp_ratio: 0.3
+query_interaction_layer: QIMv2
+query_denoise: 0.05
+update_query_pos: False
+num_queries: 10
+lr_drop: 4 # drop learning rate after this number of epochs, defaults to 4
+lr: 0.0002
+lr_backbone: 0.00002
+lr_backbone_names: ['backbone.0']
+lr_linear_proj_names: ['reference_points', 'sampling_offsets']
+lr_linear_proj_mult: 0.1
+weight_decay: 0.0001
+clip_max_norm: 0.1
+sgd: False
+frozen_weights: ~ # only used when training with masks (not done currently)
+score_threshold_training: 0.5 # score threshold for active tracks during training. I guess these are the tracks that are still considered for error backpropagation.
+
+# AUGMENTATION
+aug_reverse_clip: False # provide probability to reverse clip
+aug_random_shift_max_ratio: 0.08
+aug_resize_scales: [608, 640, 672, 704, 736, 768, 800, 832, 864, 896, 928, 960, 992]
+aug_max_size: 1536
+aug_random_resize: [800, 1000, 1200]
+aug_random_crop_min: 800
+aug_random_crop_max: 1200
+
+# MODEL
+dilation: False
+position_embedding: sine
+enc_layers: 6
+dec_layers: 6
+dim_feedforward: 1024
+hidden_dim: 256
+nheads: 8
+dec_n_points: 4
+enc_n_points: 4
+decoder_cross_self: False
+sigmoid_attn: False
+extra_track_attn: False
+masks: False # not done currently
+set_cost_class: 2.0
+set_cost_bbox: 5.0
+set_cost_giou: 2.0
+cls_loss_coef: 2.0
+bbox_loss_coef: 5.0
+giou_loss_coef: 2.0
+backbone: resnet50
+num_feature_levels: 4
+aux_loss: True
+two_stage: False
+
+# OTHERS
+device: cuda
+use_checkpoint: True # gradient checkpointing
+seed: 42
+start_epoch: 0
+num_workers: 2
+cache_mode: False
+memory_bank_type: ~ # not implemented
+outputs_base: outputs

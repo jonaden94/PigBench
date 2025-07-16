@@ -1,6 +1,56 @@
 # Benchmarking pig detection and tracking under diverse and challenging conditions
-
 ![pigdetect_example_repo_resized](https://github.com/user-attachments/assets/19fde59e-e786-4593-8171-15c3709bdebc)
 ![pigtrack](https://github.com/user-attachments/assets/fd317b42-c0cf-45b7-bbd3-d80b3f3d43d1)
 
-Code will be published soon!
+To ensure animal welfare and effective management in pig farming, monitoring individual behavior is a crucial prerequisite. While monitoring tasks have traditionally been carried out manually, advances in machine learning methods have made it possible to collect individualized information in an increasingly automated way. Central to these methods is the localization of animals across space (object detection) and time (multi-object tracking). Despite extensive research of these two tasks in pig farming, a systematic benchmarking study has not yet been conducted. In this work, we address this gap by curating two datasets: PigDetect for object detection and PigTrack for multi-object tracking. The datasets are based on diverse image and video material from realistic barn conditions, and include challenging scenarios such as occlusions or bad visibility. For object detection, we show that challenging training images improve detection performance beyond what is achievable with randomly sampled images alone. Object detection models trained on PigDetect perform well in previously unseen environments, indicating good generalization capabilities. Comparing different approaches, we found that performance-optimized models yield substantial improvements in detection quality over real-time alternatives. For multi-object tracking, we observed that classical SORT-based methods achieve superior detection performance compared to recent learning-based models, as they can leverage high-quality detections from performance-optimized object detectors. However, learning-based models often show better association performance, suggesting they could become strong alternatives in the future. We also point out characteristic failure cases of learning-based models, providing guidance for future improvements. The datasets and research code are made publicly available to facilitate reproducibility, re-use and further development, and to encourage open science principles.
+
+The dataset and pre-trained model weights associated with this work are available [here](https://doi.org/10.25625/I6UYE9) and [here](https://doi.org/10.25625/P7VQTP). This repository also includes automatic download commands to obtain all necessary files for training and inference. So you do not need to download them manually. Simply follow the instructions in this README.
+
+## Setup and requirements
+
+To make use of the functionality provided in this repository, you first have to set up the environment.
+We recommend using Conda. If Conda is installed and activated, run the following command from the repository root:
+
+```
+source _setup/setup.sh
+```
+
+Import considerations:
+- The setup has been tested on a linux machine. We cannot provide any information for other operating systems. 
+- Your GPUs and NVIDIA driver must be compatible with the CUDA version specified in our setup (version 11.8). We cannot provide any information for environment setup with other CUDA versions.
+- MOTIP and MOTRv2 use custom CUDA operators, which require a suitable GCC compiler (e.g. version 11.4) to build them. If you do not plan to use MOTRv2 and MOTIP, you can comment out the parts of ``_setup/setup.sh`` that are responsible for compiling the operators.
+- The setup script might throw some warnings and potentially also an error that there are some incompatibilities with the "requests" package. This can be ignored.
+
+## Repository overview
+
+This repository provides functionality for training, evaluation and inference of pig detection and tracking models. Information on how to use the detection functionality can be found in the [`detection guide`](detection/README.md). Information on tracking can be found in the [`tracking guide`](tracking/README.md). All models in this repository require GPU access for training. While inference might also work on a CPU (we did not test this for all models though), it is much slower than on a GPU. Therefore, we highly recommend using a GPU for inference as well. 
+
+## Licensing
+
+This repository is a collection of several independent code bases. Please refer to the LICENSE file within each subdirectory for the specific licensing terms:
+
+- `detection/` – GNU GPL v3 
+- `tracking/boxmot/` – GNU AGPL v3  
+- `tracking/motip/` – Apache-2.0
+- `tracking/motrv2/` – Apache-2.0
+
+Any code outside those subdirectories is licensed under the MIT license.
+
+## Acknowledgements
+
+This work was funded with NextGenerationEU funds from the European Union by the Federal Ministry of Research, Technology and Space under the funding code 16DKWN038. The responsibility for the content of this publication lies with the authors.
+
+![combined](https://github.com/user-attachments/assets/20af25da-011a-4382-8077-8f3237dccf58)
+
+This repository builds on several existing object detection and multi-object tracking code bases:
+
+| Project | Codebase |
+|--------|----------|
+| [MOTRv2](https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_MOTRv2_Bootstrapping_End-to-End_Multi-Object_Tracking_by_Pretrained_Object_Detectors_CVPR_2023_paper.pdf) | [github.com/megvii-research/MOTRv2](https://github.com/megvii-research/MOTRv2) |
+| [MOTIP](https://openaccess.thecvf.com/content/CVPR2025/papers/Gao_Multiple_Object_Tracking_as_ID_Prediction_CVPR_2025_paper.pdf) | [github.com/MCG-NJU/MOTIP](https://github.com/MCG-NJU/MOTIP) |
+| BoxMOT | [github.com/mikel-brostrom/boxmot](https://github.com/mikel-brostrom/boxmot) |
+| [MMDetection](https://arxiv.org/abs/1906.07155) | [github.com/open-mmlab/mmdetection](https://github.com/open-mmlab/mmdetection) |
+| MMYOLO | [github.com/open-mmlab/mmyolo](https://github.com/open-mmlab/mmyolo) |
+
+
+These code bases are in turn built on code from many previous works including [TrackEval](https://github.com/JonathonLuiten/TrackEval), [MOTR](https://github.com/megvii-research/MOTR), [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR), [ByteTrack](https://github.com/FoundationVision/ByteTrack), [YOLOX](https://github.com/Megvii-BaseDetection/YOLOX), [OC-SORT](https://github.com/noahcao/OC_SORT), [DanceTrack](https://github.com/DanceTrack/DanceTrack) and [BDD100K](https://github.com/bdd100k/bdd100k). We thank the authors of all of these projects for making their work publicly available.

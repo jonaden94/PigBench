@@ -1,0 +1,105 @@
+SUPER_CONFIG_PATH: ~
+
+# System config, like CPU/GPU
+NUM_CPU_PER_GPU: ~ # number of CPU per GPU; doesnt have to be set explicitly though
+NUM_WORKERS: 6
+DEVICE: cuda
+
+# Sampling settings: (all are lists of same length that determine how frames are sampled for training)
+SAMPLE_STEPS: [0] # list of epoch numbers (in descending order). the corresponding values from SAMPLE_LENGTHS, SAMPLE_MODES and SAMPLE_INTERVALS are then taken when specific epoch is reached
+SAMPLE_LENGTHS: [40] # number of consecutive frames per iteration (determines the max disappearance (miss) tolerance of tracklets)
+SAMPLE_MODES: [random_interval] # I guess this is for random sampling (see argument right below); no other sample mode possible
+SAMPLE_INTERVALS: [3] # MAXIMALLY sample every nth frame (randomly determined from 1 to SAMPLE_INTERVALS).
+
+# Data augmentation setting:
+AUG_REVERSE_CLIP: 0.0
+AUG_OVERFLOW_BBOX: False
+
+# Model settings:
+NUM_ID_VOCABULARY: 50
+NUM_CLASSES: 1
+MAX_TEMPORAL_LENGTH: 40 # Also determines the max disappearance (miss) tolerance of tracklets
+ID_LOSS_WEIGHT: 1
+ID_LOSS_GPU_AVERAGE: True
+ID_DECODER_LAYERS: 6
+SEQ_HIDDEN_DIM: 256
+SEQ_DIM_FEEDFORWARD: 512
+SEQ_NUM_HEADS: 8
+
+# Backbone:
+BACKBONE: resnet50
+DILATION: False
+
+# DETR-Framework:
+DETR_NUM_QUERIES: 300
+DETR_NUM_FEATURE_LEVELS: 4
+DETR_AUX_LOSS: True
+DETR_WITH_BOX_REFINE: True
+DETR_TWO_STAGE: False
+DETR_MASKS: False
+DETR_HIDDEN_DIM: 256
+DETR_PE: sine
+DETR_ENC_LAYERS: 6
+DETR_DEC_LAYERS: 6
+DETR_NUM_HEADS: 8
+DETR_DIM_FEEDFORWARD: 1024
+DETR_DROPOUT: 0.0
+DETR_DEC_N_POINTS: 4
+DETR_ENC_N_POINTS: 4
+DETR_CLS_LOSS_COEF: 2.0
+DETR_BBOX_LOSS_COEF: 5.0
+DETR_GIOU_LOSS_COEF: 2.0
+DETR_FOCAL_ALPHA: 0.25
+DETR_FRAMEWORK: Deformable-DETR
+
+# Training Setting:
+SEED: 42
+DETR_NUM_TRAIN_FRAMES: 4 # how many of the frames are actually used for training (rest of the SAMPLE_LENGTHS frames only serve as context)
+
+# Below two parameters are for memory optimized DETR training:
+DETR_CHECKPOINT_FRAMES: 5
+SEQ_DECODER_CHECKPOINT: False
+
+# Training Augmentation:
+TRAJ_DROP_RATIO: 0.5
+TRAJ_SWITCH_RATIO: 0.3
+
+# Training Scheduler:
+EPOCHS: 14
+LR: 1.0e-4
+LR_BACKBONE_NAMES: [backbone.0]
+LR_BACKBONE_SCALE: 0.1
+LR_LINEAR_PROJ_NAMES: [reference_points, sampling_offsets]
+LR_LINEAR_PROJ_SCALE: 0.05
+LR_WARMUP_EPOCHS: 1
+WEIGHT_DECAY: 0.0005
+CLIP_MAX_NORM: 0.1
+SCHEDULER_TYPE: MultiStep
+SCHEDULER_MILESTONES: [8, 12]
+SCHEDULER_GAMMA: 0.1
+BATCH_SIZE: 1
+ACCUMULATE_STEPS: 2
+RESUME_MODEL:
+RESUME_OPTIMIZER: True
+RESUME_SCHEDULER: True
+RESUME_STATES: True
+
+# Outputs:
+OUTPUTS_BASE: outputs
+OUTPUTS_PER_STEP: 100
+USE_TENSORBOARD: False
+USE_WANDB: False
+GIT_VERSION: ~ # you should input the git version here, if you are using wandb to log your experiments.
+PROJECT_NAME: ~
+EXP_GROUP: ~
+EXP_OWNER: ~
+
+# Settings which are used to reduce the memory usage of DETR criterion.
+# Too many objects (such as crowdhuman) may cause OOM error.
+MEMORY_OPTIMIZED_DETR_CRITERION: False
+AUTO_MEMORY_OPTIMIZED_DETR_CRITERION: False
+CHECKPOINT_DETR_CRITERION: False
+
+# ################### To avoid CUDA OOM:
+# AUTO_MEMORY_OPTIMIZED_DETR_CRITERION: True
+# DETR_CHECKPOINT_FRAMES: 2

@@ -1,0 +1,5 @@
+super_config_path: configs/base.yaml
+
+# deepocsort-specific config
+tracker_type: "deepocsort" # Which tracker to use (e.g. botsort, strongsort, etc.)
+exp_name: "deepocsort"

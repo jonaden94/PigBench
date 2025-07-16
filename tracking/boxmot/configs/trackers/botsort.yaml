@@ -1,0 +1,39 @@
+track_high_thresh:
+  type: uniform
+  default: 0.6595900946916247
+  range: [0.3, 0.7]
+
+track_low_thresh:
+  type: uniform
+  default: 0.1283576782067845
+  range: [0.1, 0.3]
+
+new_track_thresh:
+  type: uniform
+  default: 0.7177058359568127
+  range: [0.1, 0.8]
+
+track_buffer:
+  type: randint
+  default: 66
+  range: [20, 81]
+
+match_thresh:
+  type: uniform
+  default: 0.8379566538645464
+  range: [0.1, 0.9]
+
+proximity_thresh:
+  type: uniform
+  default: 0.33034906447694784
+  range: [0.25, 0.75]
+
+appearance_thresh:
+  type: uniform
+  default: 0.5865390662326794
+  range: [0.1, 0.8]
+
+cmc_method:
+  type: choice
+  default: sof
+  options: ['sof', 'ecc']

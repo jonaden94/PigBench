@@ -1,0 +1,57 @@
+SUPER_CONFIG_PATH: ./configs/base.yaml
+MODE: ~ # "train" or "inference" or "video_inference"
+EXP_NAME: ~
+
+################### training data
+DATA_ROOT: ../data/datasets
+DATASETS: [PigTrack, PigDetect, PigDetect]
+DATASET_SPLITS: [train, dev, test]
+DATASET_SEQMAP_NAMES: [~, ~, ~]
+DATASET_TYPES: ['track', 'det', 'det']
+
+################### pretrained weights:
+DETR_PRETRAIN: ../data/pretrained/motip/detr/detr_pretrained_pigs.pth
+PRETRAIN: ~
+
+################### Training:
+TRAIN_STAGE: joint
+EPOCHS: 18
+SCHEDULER_MILESTONES: [10, 14]
+
+################### Inference:
+EVALUATE_INFERENCE_MODE: False
+INFERENCE_DATASET: PigTrack
+INFERENCE_SPLIT: val
+INFERENCE_ONLY_DETR: False
+INFERENCE_SHORT_MAX_SIZE: 800 # first resize image so that shorter side is this
+INFERENCE_LONG_MAX_SIZE: 1536 # if longer side then exceeds this, adapt resize factor so that longer side is this
+INFERENCE_ENSEMBLE: 0
+VISUALIZE_INFERENCE: False
+ID_THRESH: 0.2
+DET_THRESH: 0.3 # only consider detections whose confidence exceeds this threshold
+NEWBORN_THRESH: 0.6 # only consider detections whose confidence exceeds this threshold for newborn objects (stricter than DET_THRESH)
+AREA_THRESH: 100 # only consider detections whose area exceeds this threshold
+PUSH_FORWARD_THRESH: -1 # -1 means this is not applied. If this is for example 5, then occluded objects will always be kept at the 5th recent position of the trajectory history by "pushing it forward", enabling re-identification
+PATIENCE_SINGLE: 40 # If PUSH_FORWARD_THRESH is -1, this is not applied. Maximum number of times that objects that were only detected once can be pushed forward (see PUSH_FORWARD_THRESH) without re-appearing. Will be deleted afterwards.
+PATIENCE_MULTIPLE: 120 # If PUSH_FORWARD_THRESH is -1, this is not applied. Maximum number of times that objects that were detected multiple times can be pushed forward (see PUSH_FORWARD_THRESH) without re-appearing. Will be deleted afterwards.
+
+################### Additional video inference settings:
+INFERENCE_MODEL: ~
+VIDEO_DIR: ~ # provide in case of video inference
+
+################### Data augmentation
+###### Data augmentation setting for static images:
+AUG_RANDOM_SHIFT_MAX_RATIO: 0.06 # maximum shift in x and y direction calculated based on longer side of image
+# e.g. if longer side has length 1000, then shift is randomly selected between -50 and 50 for both x and y
+###### First possible path of video augmentation:
+# AUG_RESIZE_SCALES: [608, 640, 672, 704, 736, 768, 800, 832, 864, 896, 928, 960, 992] # randomly resize entire image so that shorter side is one of these (maintaining aspect ratio)
+AUG_RESIZE_SCALES: [608, 640, 672, 704, 736, 768, 800, 832] # randomly resize entire image so that shorter side is one of these (maintaining aspect ratio)
+AUG_MAX_SIZE: 1536 # during resizing, check if longer side of resized image exceeds this and potentially adjust resize scale so that longer side is this
+# effectively, the value of AUG_MAX_SIZE might make some values of AUG_RESIZE_SCALES impossible depending on the original aspect ratio of the image
+###### second possible path of video augmentation
+AUG_RANDOM_RESIZE: [800, 1000, 1200] # randomly resize entire image so that shorter side is one of these (maintaining aspect ratio)
+# afterwards randomly select width/height between AUG_RANDOM_CROP_MIN and min(AUG_RANDOM_CROP_MAX, width/height) and crop image from that size
+# illegal bboxes (i.e. size 0) are discarded and bboxes are adapted to the crop (e.g. bboxes also get smaller in case part of it is cropped)
+AUG_RANDOM_CROP_MIN: 800 # see description above
+AUG_RANDOM_CROP_MAX: 1200 # see description above
+# after the cropping. the crop is again resized as in first possible path by selecting a random scale from AUG_RESIZE_SCALES constrained by AUG_MAX_SIZE

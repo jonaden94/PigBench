@@ -1,0 +1,74 @@
+det_thresh:
+  type: uniform
+  default: 0.5909595221531623
+  range: [0.3, 0.6]
+
+max_age:
+  type: randint
+  default: 10
+  range: [10, 61, 10]
+
+min_hits:
+  type: randint
+  default: 1
+  range: [1, 6]
+
+iou_thresh:
+  type: uniform
+  default: 0.11598242332629433
+  range: [0.1, 0.4]
+
+delta_t:
+  type: randint
+  default: 5
+  range: [1, 6]
+
+asso_func:
+  type: choice
+  default: iou
+  options: ['iou', 'giou', 'diou', 'ciou', 'hmiou']
+
+inertia:
+  type: uniform
+  default: 0.11798141542627824
+  range: [0.1, 0.4]
+
+w_association_emb:
+  type: uniform
+  default: 0.6202027963935023
+  range: [0.5, 0.9]
+
+alpha_fixed_emb:
+  type: uniform
+  default: 0.9983295790282244
+  range: [0.9, 0.999]
+
+aw_param:
+  type: uniform
+  default: 0.5205587874559818
+  range: [0.3, 0.7]
+
+embedding_off:
+  type: choice
+  default: False
+  options: [True, False]
+
+cmc_off:
+  type: choice
+  default: True
+  options: [True, False]
+
+aw_off:
+  type: choice
+  default: False
+  options: [True, False]
+
+Q_xy_scaling:
+  type: uniform
+  default: 0.4045788533934755
+  range: [0.01, 1]
+
+Q_s_scaling:
+  type: uniform
+  default: 0.513772288853203
+  range: [0.0001, 1]

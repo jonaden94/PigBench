@@ -1,0 +1,44 @@
+det_thresh:
+  type: uniform
+  default: 0.566743980811342
+  range: [0, 0.6]
+
+max_age:
+  type: grid_search
+  default: 20
+  values: [10, 20, 30, 40, 50, 60]
+
+min_hits:
+  type: grid_search
+  default: 1
+  values: [1, 2, 3, 4, 5]
+
+delta_t:
+  type: grid_search
+  default: 2
+  values: [1, 2, 3, 4, 5]
+
+asso_func:
+  type: choice
+  default: iou
+  options: ['iou', 'giou', 'diou', 'ciou', 'hmiou']
+
+use_byte:
+  type: choice
+  default: True
+  options: [True, False]
+
+inertia:
+  type: uniform
+  default: 0.19297324527591983
+  range: [0.1, 0.4]
+
+Q_xy_scaling:
+  type: loguniform
+  default: 0.03005866770001921
+  range: [0.01, 1]
+
+Q_s_scaling:
+  type: loguniform
+  default: 0.000497465132326278
+  range: [0.0001, 1]

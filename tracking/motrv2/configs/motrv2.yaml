@@ -1,0 +1,39 @@
+super_config_path: configs/base.yaml
+mode: ~ # "train" or "inference" or "video_inference"
+
+######################### DATASET
+data_root: ../data/datasets # data root where all datasets are located
+mot_datasets: [PigTrack] # tracking datasets to use
+mot_dataset_splits: [train] # tracking splits to use
+det_datasets: [PigDetect, PigDetect] # det datasets to use
+det_dataset_splits: [dev, test] # det splits to use
+append_det: True # whether to use additional detection set for pseudo tracks
+det_db: ../data/datasets/PigTrack/bbox_priors_minconf0.5_rgb.json
+
+#################### IN ORIGINAL CONFIG
+epochs: 20
+lr_drop: 10
+print_freq: 100 # print training progress every print_freq iterations
+pretrained: ../data/pretrained/motrv2/full_model/motrv2_dancetrack.pth # model initialization
+resume: '' # in case of resuming training from a checkpoint
+exp_name: ~ # name of the experiment determines save directory
+
+# INFERENCE DURING TRAINING
+evaluate_inference_mode: False
+inference_dataset: PigTrack # name of the dataset to use for inference
+inference_split: val # name of the split to use for inference
+visualize_inference: False # whether to visualize inference results
+score_threshold_inference: 0.5 # min confidence for newborn objects and reappeared objects; if conf of existing track gets below this value, the object counts as disappeared for that frame
+newborn_threshold_inference: 0.6 # min confidence for newborn objects
+area_threshold: 100 # min area in pixels^2 for newborn objects and reappeared objects
+miss_tolerance: 20 # if object disappears for more than this number of frames, it is deleted and cannot be recovered
+inference_short_max_size: 800 # first resize image so that shorter side is this
+inference_long_max_size: 1536 # if longer side then exceeds this, adapt resize factor so that longer side is this
+
+# ADDITIONAL CONFIG USED DURING VIDEO INFERENCE SEPARETE FROM TRAINING
+inference_detector_config: detector/co_detr/configs/co_dino_swin.py # path to detector config
+inference_detector_checkpoint: ../data/pretrained/codino/codino_swin.pth # path to detector checkpoint
+inference_detector_min_conf: 0.5
+inference_save_video_frames: False
+video_dir: ~ # path to video directory containing mp4 or mkv videos
+inference_model: ~ # only provide in case of inference separate from training

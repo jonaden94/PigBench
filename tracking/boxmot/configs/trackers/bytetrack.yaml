@@ -1,0 +1,19 @@
+track_thresh:
+  type: uniform
+  default: 0.4368439856947476
+  range: [0.4, 0.6]
+
+track_buffer:
+  type: randint
+  default: 10
+  range: [10, 61, 10]
+
+match_thresh:
+  type: uniform
+  default: 0.8807038476118574
+  range: [0.7, 0.9]
+
+frame_rate:
+  type: choice
+  default: 30
+  choices: [30]

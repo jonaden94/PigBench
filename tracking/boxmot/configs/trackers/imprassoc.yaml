@@ -1,0 +1,59 @@
+track_high_thresh:
+  type: uniform
+  default: 0.3055280446519255
+  range: [0.3, 0.7]
+
+track_low_thresh:
+  type: uniform
+  default: 0.05796906565194155
+  range: [0.05, 0.3]
+
+new_track_thresh:
+  type: uniform
+  default: 0.8395694889572878
+  range: [0.5, 0.9]
+
+track_buffer:
+  type: qrandint
+  default: 40
+  range: [20, 80, 10]
+
+match_thresh:
+  type: uniform
+  default: 0.8172745910677952
+  range: [0.1, 0.9]
+
+second_match_thresh:
+  type: uniform
+  default: 0.3937009050083275
+  range: [0.1, 0.4]
+
+overlap_thresh:
+  type: uniform
+  default: 0.4563908823876027
+  range: [0.3, 0.6]
+
+proximity_thresh:
+  type: uniform
+  default: 0.13210817090834245
+  range: [0.1, 0.8]
+
+appearance_thresh:
+  type: uniform
+  default: 0.5874603805279374
+  range: [0.1, 0.8]
+
+cmc_method:
+  type: choice
+  default: sparseOptFlow
+  options: ['sparseOptFlow']
+
+frame_rate:
+  type: choice
+  default: 30
+  options: [30]
+
+lambda_:
+  type: uniform
+  default: 0.2848199880844367
+  range: [0.05, 0.3]

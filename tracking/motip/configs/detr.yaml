@@ -1,0 +1,57 @@
+SUPER_CONFIG_PATH: ./configs/base.yaml
+MODE: ~ # "train" or "inference" or "video_inference"
+EXP_NAME: ~
+
+################### training data
+DATA_ROOT: ../data/datasets
+DATASETS: [PigTrack, PigDetect, PigDetect]
+DATASET_SPLITS: [train, dev, test]
+DATASET_SEQMAP_NAMES: [~, ~, ~]
+DATASET_TYPES: ['track', 'det', 'det']
+
+################### pretrained weights:
+DETR_PRETRAIN: ../data/pretrained/motip/detr/r50_deformable_detr_coco.pth # Pretrain from COCO checkpoint
+PRETRAIN: ~
+
+################### Training:
+TRAIN_STAGE: only_detr
+EPOCHS: 50
+LR: 2.0e-4
+LR_WARMUP_EPOCHS: 0
+SCHEDULER_MILESTONES: [20, 35]
+SCHEDULER_GAMMA: 0.1
+BATCH_SIZE: 4
+ACCUMULATE_STEPS: 1
+
+################### Inference:
+EVALUATE_INFERENCE_MODE: False
+INFERENCE_DATASET: PigTrack
+INFERENCE_SPLIT: val
+INFERENCE_ONLY_DETR: True
+INFERENCE_SHORT_MAX_SIZE: 800 # first resize image so that shorter side is this
+INFERENCE_LONG_MAX_SIZE: 1536 # if longer side then exceeds this, adapt resize factor so that longer side is this
+INFERENCE_ENSEMBLE: 0
+VISUALIZE_INFERENCE: False
+ID_THRESH: 0.2
+DET_THRESH: 0.3 # only consider detections whose confidence exceeds this threshold
+NEWBORN_THRESH: 0.6 # only consider detections whose confidence exceeds this threshold for newborn objects (stricter than DET_THRESH)
+AREA_THRESH: 100 # only consider detections whose area exceeds this threshold
+PUSH_FORWARD_THRESH: -1 # -1 means this is not applied. If this is for example 5, then occluded objects will always be kept at the 5th recent position of the trajectory history by "pushing it forward", enabling re-identification
+PATIENCE_SINGLE: 40 # If PUSH_FORWARD_THRESH is -1, this is not applied. Maximum number of times that objects that were only detected once can be pushed forward (see PUSH_FORWARD_THRESH) without re-appearing. Will be deleted afterwards.
+PATIENCE_MULTIPLE: 120 # If PUSH_FORWARD_THRESH is -1, this is not applied. Maximum number of times that objects that were detected multiple times can be pushed forward (see PUSH_FORWARD_THRESH) without re-appearing. Will be deleted afterwards.
+
+################### Additional video inference settings:
+INFERENCE_MODEL: ~
+VIDEO_DIR: ~ # provide in case of video inference
+
+################### detection specific settings
+SAMPLE_LENGTHS: [1]       # Only sampling one frame for detection
+DETR_NUM_TRAIN_FRAMES: 100                                # >> BS
+
+################### Data augmentation
+AUG_RANDOM_SHIFT_MAX_RATIO: 0.06 # Only for static images
+AUG_RESIZE_SCALES: [608, 640, 672, 704, 736, 768, 800, 832, 864, 896, 928, 960, 992]
+AUG_MAX_SIZE: 1536
+AUG_RANDOM_RESIZE: [800, 1000, 1200]
+AUG_RANDOM_CROP_MIN: 800
+AUG_RANDOM_CROP_MAX: 1200

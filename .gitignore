@@ -1,0 +1,33 @@
+################ Detection
+# data related stuff
+detection/data/PigDetect
+detection/data/pretrained_weights
+detection/data/evaluation
+detection/outputs
+detection/.dist_test
+
+################ Tracking
+tracking/data
+tracking/**/*.jpg
+tracking/motrv2/outputs
+tracking/motip/outputs
+tracking/motip/outputs_scratch
+tracking/boxmot/outputs
+**/reid_weights/
+**/build/
+**/dist/
+**/outputs/
+**/outputs_scratch/
+
+################ General
+**/__pycache__/
+**.pth
+*.pth
+**.pt
+*.pt
+**.egg-info
+*.egg-info
+**.egg
+*.egg
+**.mp4
+*.mp4

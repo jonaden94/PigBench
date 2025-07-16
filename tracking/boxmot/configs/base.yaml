@@ -1,0 +1,23 @@
+super_config_path: ~
+
+############## DETECTOR
+inference_detector_config: "detector/co_detr/co_dino_swin.py"
+inference_detector_checkpoint: "../data/pretrained/codino/codino_swin.pth"
+inference_detector_min_conf: 0.1  # Confidence threshold for detections (needs be adjusted for some trackers, e.g. bytetrack expects low conf detections)
+
+############## TRACKER
+reid_weights: "osnet_x1_0_msmt17.pt" # Path to ReID model
+half: False # Whether to use FP16 (half precision) inference
+
+############## INFERENCE ARGS
+mode: "video_inference" # Either "inference" for folders of images, or "video_inference" for video files
+seq_dir: "../data/datasets/PigTrackVideos" # Path to your directory of sequences or videos for inference
+outputs_base: outputs # base directory to save outputs
+visualize_inference: True # whether to visualize inference results
+
+############## INFERENCE EVALUATION ARGS 
+evaluate_inference_mode: False
+gt_dir: '../data/datasets/PigTrack/test' # Path to ground truth directory
+
+############## OTHER
+device: "cuda:0"

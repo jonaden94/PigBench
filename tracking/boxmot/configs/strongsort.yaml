@@ -1,0 +1,6 @@
+super_config_path: configs/base.yaml
+
+# strongsort-specific config
+inference_detector_min_conf: 0.5 # set manually to 0.5 here since the tracker config does not have a hyperparameter to regulate this
+tracker_type: "strongsort" # Which tracker to use (e.g. botsort, strongsort, etc.)
+exp_name: "strongsort"
