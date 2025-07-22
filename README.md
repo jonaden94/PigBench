@@ -23,7 +23,7 @@ Import considerations:
 
 ## Repository overview
 
-This repository provides functionality for training, evaluation and inference of pig detection and tracking models. Information on how to use the detection functionality can be found in the [`detection guide`](detection/README.md). Information on tracking can be found in the [`tracking guide`](tracking/README.md). All models in this repository require GPU access for training. While inference might also work on a CPU (we did not test this for all models though), it is much slower than on a GPU. Therefore, we highly recommend using a GPU for inference as well. 
+This repository provides functionality for training, evaluation and inference of pig detection and tracking models. Information on how to use the detection functionality can be found in the [detection guide](detection/README.md). Information on tracking can be found in the [tracking guide](tracking/README.md). All models in this repository require GPU access for training. While inference might also work on a CPU (we did not test this for all models though), it is much slower than on a GPU. Therefore, we highly recommend using a GPU for inference as well. 
 
 ## Licensing
 
