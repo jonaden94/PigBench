@@ -8,19 +8,21 @@ The preprint of the paper is available [here](https://arxiv.org/abs/2507.16639).
 
 ## Setup and requirements
 
-To make use of the functionality provided in this repository, you first have to set up the environment.
-We recommend using Conda. If Conda is installed and activated, run the following command from the repository root:
+Import information:
+- The setup has been tested on a linux machine. We cannot provide any information for other operating systems. 
+- Your GPUs and NVIDIA driver must be compatible with the CUDA version specified in our setup (version 11.8). We cannot provide any information for environment setup with other CUDA versions.
+- MOTIP and MOTRv2 use custom CUDA operators, which require a suitable GCC compiler to build them (e.g. version 11.4). Furthermore, the compilation relies on several CUDA-related environment variables that might not be automatically set by your system. Therefore, this part of the environment setup is error prone, but it is also not required if you do not plan to use these models.
+- The setup script might throw some warnings and potentially also an error that there are some incompatibilities with the "requests" package. This can be ignored.
 
+To set up the environment, we recommend using Conda. If Conda is installed and activated, run either of the following two setup scripts depending on which models you plan to use. If you plan to only use the detection models and SORT-based tracking models, run the following script:
 ```
 source _setup/setup.sh
 ```
 
-Import considerations:
-- The setup has been tested on a linux machine. We cannot provide any information for other operating systems. 
-- Your GPUs and NVIDIA driver must be compatible with the CUDA version specified in our setup (version 11.8). We cannot provide any information for environment setup with other CUDA versions.
-- MOTIP and MOTRv2 use custom CUDA operators, which require a suitable GCC compiler (e.g. version 11.4) to build them. If you do not plan to use MOTRv2 and MOTIP, you can comment out the parts of ``_setup/setup.sh`` that are responsible for compiling the operators.
-- The setup script might throw some warnings and potentially also an error that there are some incompatibilities with the "requests" package. This can be ignored.
-
+If you want to create an environment that supports all models in this repository (including MOTIP and MOTRv2), run the following script instead:
+```
+source _setup/setup_with_e2e_models.sh
+```
 ## Repository overview
 
 This repository provides functionality for training, evaluation and inference of pig detection and tracking models. Information on how to use the detection functionality can be found in the [detection guide](detection/README.md). Information on tracking can be found in the [tracking guide](tracking/README.md). All models in this repository require GPU access for training. While inference might also work on a CPU (we did not test this for all models though), it is much slower than on a GPU. Therefore, we highly recommend using a GPU for inference as well. 
