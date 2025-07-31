@@ -6,12 +6,19 @@ To ensure animal welfare and effective management in pig farming, monitoring ind
 
 The preprint of the paper is available [here](https://arxiv.org/abs/2507.16639). The datasets and pre-trained model weights associated with this work are available [here](https://doi.org/10.25625/I6UYE9) and [here](https://doi.org/10.25625/P7VQTP). This repository also includes automatic download commands to obtain all necessary files for training and inference. So you do not need to download them manually. Simply follow the instructions in this README.
 
+## Demo
+For a quick demo of the detection and tracking models presented in our work, we prepared a google colab notebook: 
+
+<a target="_blank" href="https://colab.research.google.com/github/jonaden94/PigBench/blob/main/Demo.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>  
+</a> 
+
 ## Setup and requirements
 
-Import information:
+If you want to use this repository on your own system, you need to first set up the environment. Before doing so, keep the following important information in mind:
 - The setup has been tested on a linux machine. We cannot provide any information for other operating systems. 
 - Your GPUs and NVIDIA driver must be compatible with the CUDA version specified in our setup (version 11.8). We cannot provide any information for environment setup with other CUDA versions.
-- MOTIP and MOTRv2 use custom CUDA operators, which require a suitable GCC compiler to build them (e.g. version 11.4). Furthermore, the compilation relies on several CUDA-related environment variables that might not be automatically set by your system. Therefore, this part of the environment setup is error prone, but it is also not required if you do not plan to use these models.
+- MOTIP and MOTRv2 use custom CUDA operators, which require a suitable GCC compiler to build them (e.g. version 11.4). Furthermore, the compilation relies on several CUDA-related environment variables that might not be automatically set by your system. Therefore, this part of the environment setup is error prone, but it is also **not required** if you do not plan to use these models.
 - The setup script might throw some warnings and potentially also an error that there are some incompatibilities with the "requests" package. This can be ignored.
 
 To set up the environment, we recommend using Conda. If Conda is installed and activated, run either of the following two setup scripts depending on which models you plan to use. If you plan to only use the detection models and SORT-based tracking models, run the following script:
