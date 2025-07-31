@@ -6,9 +6,8 @@ conda activate $ENV_NAME
 
 ############# torch
 # module load cuda/11.8 # Lmod command to load cuda version compatible with the installed pytorch version
-conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 pytorch-cuda=11.8 -c pytorch -c nvidia -y
+conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 pytorch-cuda=11.8 mkl=2024.0.0 -c pytorch -c nvidia -y
 conda install nvidia/label/cuda-11.8.0::cuda-toolkit -y # fixes some cudnn loading error
-conda install mkl=2024.0.0 -y # fixes some pytorch bug
 
 ############# pip packages
 pip install -r _setup/requirements.txt
