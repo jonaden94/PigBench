@@ -28,3 +28,4 @@ if __name__ == "__main__":
         shutil.rmtree('data/PigDetect/dev')
         shutil.rmtree('data/PigDetect/test')
         os.remove('data/PigDetect/PigDetect.zip')
+        print("PigDetect dataset restructured successfully.")

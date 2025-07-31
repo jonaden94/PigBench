@@ -71,3 +71,4 @@ if __name__ == '__main__':
             annotations_input_dir = f'../../data/datasets/PigDetect/{split}/labels'
             annotations_output_dir = f'../../data/datasets/PigDetect/{split}/gts'
             restructure_yolo_annotations(image_dir, annotations_input_dir, annotations_output_dir)
+        print("PigDetect dataset restructured successfully.")
