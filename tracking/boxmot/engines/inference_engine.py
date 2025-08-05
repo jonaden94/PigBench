@@ -136,6 +136,7 @@ def inference(cfg, tracker_cfg):
         # Write to the file
         with open(output_file, "w") as f:
             f.writelines(lines)
+        print(f"[INFO] Completed inference for sequence {seq_name}. Results saved to {output_file}", flush=True)
     
     if cfg.distributed:
         torch.distributed.barrier()

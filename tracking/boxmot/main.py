@@ -1,10 +1,8 @@
 import os
-import sys
 import yaml
 import torch
-import builtins as __builtin__
 from utils.misc import (init_distributed_mode, yaml_to_dict, update_config, 
-                         load_super_config, write_dict_to_yaml,
+                         load_super_config, write_dict_to_yaml, setup_logging,
                          is_main_process, parse_option, get_tracker_config_path)
 from engines.inference_engine import inference
 from engines.eval_engine import evaluate_inference
@@ -42,8 +40,8 @@ def main(cfg):
         write_dict_to_yaml(tracker_cfg, tracker_config_save_path)
         # Log file capture
         log_file = os.path.join(cfg.outputs_dir, 'log.txt')
-        sys.stdout = open(log_file, "w")
-        sys.stderr = sys.stdout
+        logger, _ = setup_logging(log_file)
+        
     if cfg.distributed:
         torch.distributed.barrier()
 

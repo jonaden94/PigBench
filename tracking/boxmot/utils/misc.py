@@ -7,6 +7,9 @@ import subprocess
 import torch.distributed as dist
 import builtins as __builtin__
 import warnings
+import logging
+import sys
+import builtins as __builtin__
 
 ############################################# DISTRIBUTED
 def is_dist_avail_and_initialized():
@@ -202,3 +205,39 @@ def get_tracker_config_path(tracker_type: str) -> str:
         return 'configs/trackers/imprassoc.yaml'
     else:
         raise ValueError(f"Tracker type '{tracker_type}' not supported.")
+
+############################################# LOGGIN
+def setup_logging(log_file):
+    """Setup logging to print to both console and a log file."""
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+
+    # Clear old handlers (important if this script is re-imported)
+    if logger.hasHandlers():
+        logger.handlers.clear()
+
+    # File handler
+    fh = logging.FileHandler(log_file)
+    fh.setLevel(logging.INFO)
+
+    # Console handler
+    ch = logging.StreamHandler(sys.stdout)
+    ch.setLevel(logging.INFO)
+
+    # Formatter
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+    ch.setFormatter(formatter)
+
+    # Add handlers
+    logger.addHandler(fh)
+    logger.addHandler(ch)
+
+    # Redirect print() to logger
+    builtins_print = __builtin__.print
+    def print_to_logger(*args, **kwargs):
+        msg = " ".join(str(a) for a in args)
+        logger.info(msg)
+    __builtin__.print = print_to_logger
+
+    return logger, builtins_print

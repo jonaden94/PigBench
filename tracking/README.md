@@ -33,4 +33,4 @@ python tools/download/restructure_videos.py
 ```
 
 ## Tracking models
-Once the data is prepared, you can use the provided training and inference functionality for the models evaluated in our paper. If you wanna use one of the SORT-based models, follow the [`BoxMOT guide`](boxmot/README.md). Information on how to use the learning-based models can be found in the [`MOTIP guide`](motip/README.md) and [`MOTRv2 guide`](motrv2/README.md).
+Once the data is prepared, you can use the provided training and inference functionality for the models evaluated in our paper. If you wanna use one of the SORT-based models, follow the [BoxMOT guide](boxmot/README.md). Information on how to use the learning-based models can be found in the [MOTIP guide](motip/README.md) and [MOTRv2 guide](motrv2/README.md).

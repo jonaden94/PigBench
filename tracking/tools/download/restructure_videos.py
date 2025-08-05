@@ -26,3 +26,4 @@ if __name__ == '__main__':
     # Remove all folders except these
     keep = {'pigtrack0004.mp4', 'pigtrack0010.mp4'}
     remove_unwanted_folders(unzip_path, keep)
+    print("Unzipping and cleanup completed successfully.")
