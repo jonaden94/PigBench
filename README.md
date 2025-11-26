@@ -50,7 +50,7 @@ Any code outside those subdirectories is licensed under the MIT license.
 
 This work was funded with NextGenerationEU funds from the European Union by the Federal Ministry of Research, Technology and Space under the funding code 16DKWN038. The responsibility for the content of this publication lies with the authors.
 
-![combined](https://github.com/user-attachments/assets/20af25da-011a-4382-8077-8f3237dccf58)
+![combined](https://github.com/user-attachments/assets/c911ffad-896d-432d-8420-efdf7316726e)
 
 This repository builds on several existing object detection and multi-object tracking code bases:
 
