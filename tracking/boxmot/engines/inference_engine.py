@@ -58,7 +58,6 @@ def inference(cfg, tracker_cfg):
                     if _ % get_world_size() == get_rank()]
         
     ################### INFERENCE
-    print(f"[INFO] Running tracking inference...", flush=True)
     for seq_path in seq_paths:
         # create separate tracker for every sequence
         tracker = create_tracker(cfg.tracker_type, evolve_param_dict=tracker_cfg, reid_weights=reid_weights, device=device, half=cfg.half)
@@ -70,6 +69,7 @@ def inference(cfg, tracker_cfg):
             seq_name = os.path.basename(seq_path)[:-4]
             dataset = VideoDataset(seq_path)
             
+        print(f"[INFO] Running tracking inference for {seq_name}", flush=True)
         # Prepare output files
         colors = (np.random.rand(64, 3) * 255).astype(dtype=np.int32)
         output_file = os.path.join(cfg.tracker_dir, f"{seq_name}.txt")
@@ -78,7 +78,18 @@ def inference(cfg, tracker_cfg):
         frame_id = 1
         video_writer = None
         lines = []
-        for idx in range(len(dataset)):
+        
+        total = len(dataset)
+        next_pct = 5
+
+        for idx in range(total):
+            # integer percent (1..100)
+            pct = (idx + 1) * 100 // total
+
+            if pct >= next_pct:
+                print(f"[INFO] Progress: {next_pct}% ({idx+1}/{total})", flush=True)
+                next_pct += 5
+                
             frame, frame_ori = dataset[idx]
             seq_h, seq_w, _ = frame_ori.shape
 

@@ -1,4 +1,4 @@
-# Benchmarking pig detection and tracking under diverse and challenging conditions
+# Benchmarking pig detection and tracking under diverse and challenging conditions 🐷
 
 ![pigdetect](https://github.com/user-attachments/assets/971ba834-5882-407f-b0e2-c1f4272eea12)
 ![pigtrack](https://github.com/user-attachments/assets/16086a4c-75b5-496d-bbc9-b9734adb2277)
@@ -7,14 +7,14 @@ To ensure animal welfare and effective management in pig farming, monitoring ind
 
 The preprint of the paper is available [here](https://arxiv.org/abs/2507.16639). The datasets and pre-trained model weights associated with this work are available [here](https://doi.org/10.25625/I6UYE9) and [here](https://doi.org/10.25625/P7VQTP). This repository also includes automatic download commands to obtain all necessary files for training and inference. So you do not need to download them manually. Simply follow the instructions in this README.
 
-## Demo
+## ▶️ Demo
 For a quick demo of the detection and tracking models presented in our work, we prepared a google colab notebook: 
 
 <a target="_blank" href="https://colab.research.google.com/github/jonaden94/PigBench/blob/main/Demo.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>  
 </a> 
 
-## Setup and requirements
+## ⚙️ Setup and requirements
 
 If you want to use this repository on your own system, you need to first set up the environment. Before doing so, keep the following important information in mind:
 - The setup has been tested on a linux machine. We cannot provide any information for other operating systems. 
@@ -31,11 +31,13 @@ If you want to create an environment that supports all models in this repository
 ```
 source _setup/setup_with_e2e_models.sh
 ```
-## Repository overview
+## 🧭 Repository overview
 
 This repository provides functionality for training, evaluation and inference of pig detection and tracking models. Information on how to use the detection functionality can be found in the [detection guide](detection/README.md). Information on tracking can be found in the [tracking guide](tracking/README.md). All models in this repository require GPU access for training. While inference might also work on a CPU (we did not test this for all models though), it is much slower than on a GPU. Therefore, we highly recommend using a GPU for inference as well. 
 
-## Licensing
+*Note: In addition to the results in our paper, we found that MOTIP performance further improves when trained for more epochs (e.g. doubling the number of epochs). For example, gains of around +1% AssA are then achieved for the “MOTIP (+val)” training setup. This was missed during our original experimental planning due to unstable model convergence.*
+
+## ⚖️ Licensing
 
 This repository is a collection of several independent code bases. Please refer to the LICENSE file within each subdirectory for the specific licensing terms:
 
@@ -46,7 +48,7 @@ This repository is a collection of several independent code bases. Please refer 
 
 Any code outside those subdirectories is licensed under the MIT license.
 
-## Acknowledgements
+## 🙏 Acknowledgements
 
 This work was funded with NextGenerationEU funds from the European Union by the Federal Ministry of Research, Technology and Space under the funding code 16DKWN038. The responsibility for the content of this publication lies with the authors.
 
@@ -64,3 +66,16 @@ This repository builds on several existing object detection and multi-object tra
 
 
 These code bases are in turn built on code from many previous works including [TrackEval](https://github.com/JonathonLuiten/TrackEval), [MOTR](https://github.com/megvii-research/MOTR), [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR), [ByteTrack](https://github.com/FoundationVision/ByteTrack), [YOLOX](https://github.com/Megvii-BaseDetection/YOLOX), [OC-SORT](https://github.com/noahcao/OC_SORT), [DanceTrack](https://github.com/DanceTrack/DanceTrack) and [BDD100K](https://github.com/bdd100k/bdd100k). We thank the authors of all of these projects for making their work publicly available.
+
+## ✏️ Citation
+
+If you think this project is helpful, feel free to leave a ⭐ and cite our paper:
+
+```tex
+@article{PigBench,
+  title={Benchmarking pig detection and tracking under diverse and challenging conditions},
+  journal={arXiv preprint arXiv:2507.16639},
+  year={2025},
+  author={Henrich, Jonathan and Post, Christian and Zilke, Maximilian and Shiroya, Parth and Chanut, Emma and Yamchi, Amir Mollazadeh and Yahyapour, Ramin and Kneib, Thomas and Traulsen, Imke}
+}
+```

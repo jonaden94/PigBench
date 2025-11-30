@@ -1,6 +1,8 @@
 # Pig detection
 All paths in this guide are relative to the ``detection`` directory of the repository, which therefore needs to be set as the working directory.
 
+*Note: The code for training and inference of RT-DETR is not provided in this repository. However, our trained model weights are available [here](https://doi.org/10.25625/I6UYE9). They can be used together with the RT-DETR code from the [original repository](https://github.com/lyuwenyu/RT-DETR). In contrast to the original configuration files, our experiments used an inference resolution of 960 × 960.*
+
 ## Training
 If you are only interested in model inference, you can skip this section. For training, the PigDetect benchmark dataset and the COCO-style train/val/test annotation files are required. Furthermore, to reproduce the results from the paper, you need to download the model checkpoints pre-trained on the COCO dataset. The following commands will download all required data:
 
