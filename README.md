@@ -5,7 +5,7 @@
 
 To ensure animal welfare and effective management in pig farming, monitoring individual behavior is a crucial prerequisite. While monitoring tasks have traditionally been carried out manually, advances in machine learning have made it possible to collect individualized information in an increasingly automated way. Central to these methods is the localization of animals across space (object detection) and time (multi-object tracking). Despite extensive research of these two tasks in pig farming, a systematic benchmarking study has not yet been conducted. In this work, we address this gap by curating two datasets: PigDetect for object detection and PigTrack for multi-object tracking. The datasets are based on diverse image and video material from realistic barn conditions, and include challenging scenarios such as occlusions or bad visibility. For object detection, we show that challenging training images improve detection performance beyond what is achievable with randomly sampled images alone. Comparing different approaches, we found that state-of-the-art models offer substantial improvements in detection quality over real-time alternatives. For multi-object tracking, we observed that SORT-based methods achieve superior detection performance compared to end-to-end trainable models. However, end-to-end models show better association performance, suggesting they could become strong alternatives in the future. We also investigate characteristic failure cases of end-to-end models, providing guidance for future improvements. The detection and tracking models trained on our datasets perform well in unseen pens, suggesting good generalization capabilities. This highlights the importance of high-quality training data. The datasets and research code are made publicly available to facilitate reproducibility, re-use and further development.
 
-The preprint of the paper is available [here](https://arxiv.org/abs/2507.16639). The datasets and pre-trained model weights associated with this work are available [here](https://doi.org/10.25625/I6UYE9) and [here](https://doi.org/10.25625/P7VQTP). This repository also includes automatic download commands to obtain all necessary files for training and inference. So you do not need to download them manually. Simply follow the instructions in this README.
+The preprint of the paper is available [here](https://doi.org/10.1016/j.compag.2025.111264). The datasets and pre-trained model weights associated with this work are available [here](https://doi.org/10.25625/I6UYE9) and [here](https://doi.org/10.25625/P7VQTP). This repository also includes automatic download commands to obtain all necessary files for training and inference. So you do not need to download them manually. Simply follow the instructions in this README.
 
 ## ▶️ Demo
 For a quick demo of the detection and tracking models presented in our work, we prepared a google colab notebook: 
@@ -71,11 +71,15 @@ These code bases are in turn built on code from many previous works including [T
 
 If you think this project is helpful, feel free to leave a ⭐ and cite our paper:
 
-```tex
+```bibtex
 @article{PigBench,
-  title={Benchmarking pig detection and tracking under diverse and challenging conditions},
-  journal={arXiv preprint arXiv:2507.16639},
-  year={2025},
-  author={Henrich, Jonathan and Post, Christian and Zilke, Maximilian and Shiroya, Parth and Chanut, Emma and Yamchi, Amir Mollazadeh and Yahyapour, Ramin and Kneib, Thomas and Traulsen, Imke}
+  title     = {Benchmarking pig detection and tracking under diverse and challenging conditions},
+  author    = {Henrich, Jonathan and Post, Christian and Zilke, Maximilian and Shiroya, Parth and Chanut, Emma and Yamchi, Amir Mollazadeh and Yahyapour, Ramin and Kneib, Thomas and Traulsen, Imke},
+  journal   = {Computers and Electronics in Agriculture},
+  volume    = {241},
+  pages     = {111264},
+  year      = {2026},
+  publisher = {Elsevier},
+  doi       = {10.1016/j.compag.2025.111264}
 }
 ```
