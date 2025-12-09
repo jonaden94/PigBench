@@ -72,7 +72,7 @@ These code bases are in turn built on code from many previous works including [T
 If you think this project is helpful, feel free to leave a ⭐ and cite our paper:
 
 ```bibtex
-@article{PigBench,
+@article{pigbench2026,
   title     = {Benchmarking pig detection and tracking under diverse and challenging conditions},
   author    = {Henrich, Jonathan and Post, Christian and Zilke, Maximilian and Shiroya, Parth and Chanut, Emma and Yamchi, Amir Mollazadeh and Yahyapour, Ramin and Kneib, Thomas and Traulsen, Imke},
   journal   = {Computers and Electronics in Agriculture},
