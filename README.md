@@ -7,12 +7,14 @@ To ensure animal welfare and effective management in pig farming, monitoring ind
 
 The paper is available [here](https://doi.org/10.1016/j.compag.2025.111264). The datasets and pre-trained model weights associated with this work are available [here](https://doi.org/10.25625/I6UYE9) and [here](https://doi.org/10.25625/P7VQTP). This repository also includes automatic download commands to obtain all necessary files for training and inference. So you do not need to download them manually. Simply follow the instructions in this README.
 
-## ▶️ Demo
+## ▶️ Demo [non-functional]
 For a quick demo of the detection and tracking models presented in our work, we prepared a google colab notebook: 
 
 <a target="_blank" href="https://colab.research.google.com/github/jonaden94/PigBench/blob/main/Demo.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>  
 </a> 
+
+Unfortunately, Google Colab stopped supporting the 2025.07 runtime required to set up the environment, which is why the demo is not functional anymore.
 
 ## ⚙️ Setup and requirements
 
